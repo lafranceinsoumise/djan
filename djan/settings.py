@@ -29,7 +29,7 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,agir.local").split(",
 
 
 # Application definition
-SITE_ID = 1
+SITE_ID = os.environ.get("SITE_ID")
 INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.admin",
