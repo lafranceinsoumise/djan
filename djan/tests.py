@@ -24,9 +24,16 @@ class APITestCas(TestCase):
         res = self.client.post(
             "/api/shorten?token=supertoken", data={"url": "http://examplee.com"}
         )
-        self.assertRegex(str(res.content), r"http://testserver/[a-zA-Z0-9]{5,6}")
+        self.assertRegex(str(res.content), r"http://testserver/[a-zA-Z0-9]{5}")
 
         res = self.client.get(res.content.decode().replace("http://testserver", ""))
         self.assertRedirects(
             res, "http://examplee.com", status_code=301, fetch_redirect_response=False
         )
+
+    def test_length_param(self):
+        res = self.client.post(
+            "/api/shorten?token=supertoken",
+            data={"url": "http://examplee.com", "length": 10},
+        )
+        self.assertRegex(str(res.content), r"http://testserver/[a-zA-Z0-9]{10}")
