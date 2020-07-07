@@ -34,9 +34,7 @@ def shorten_view(request):
             defaults={"old_path": "/" + random_string},
         )
 
-        return HttpResponse(
-            request.build_absolute_uri(redirect.site.domain + redirect.old_path)
-        )
+        return HttpResponse(request.build_absolute_uri(redirect.old_path))
 
     return HttpResponseBadRequest(
         "\n".join(
