@@ -30,7 +30,6 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(","
 
 
 # Application definition
-SITE_ID = int(os.environ.get("SITE_ID"))
 INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.admin",
