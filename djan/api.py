@@ -3,6 +3,7 @@ import secrets
 
 from django.conf import settings
 from django.contrib.redirects.models import Redirect
+from django.contrib.sites.shortcuts import get_current_site
 from django.forms import Form, URLField, IntegerField
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -28,8 +29,9 @@ def shorten_view(request):
     if form.is_valid():
         length = form.cleaned_data["length"] or 5
         random_string = secrets.token_urlsafe(length)[:length]
+        site = get_current_site(request)
         redirect, new = Redirect.objects.get_or_create(
-            site_id=settings.SITE_ID,
+            site_id=site.id,
             new_path=form.cleaned_data["url"],
             defaults={"old_path": "/" + random_string},
         )
