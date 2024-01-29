@@ -1,0 +1,83 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "djan"
+dynamic = ["version"]
+description = "Un tout petit racourcisseur d'URLs"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Salomé Cheysson", email = "salome@cheysson.fr" },
+  { name = "Maud Royer", email = "bonjour@maudroyer.fr"},
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["django>=5.0.1"]
+
+[project.urls]
+Documentation = "https://github.com/lafranceinsoumise/djan#readme"
+Issues = "https://github.com/lafranceinsoumise/djan/issues"
+Source = "https://github.com/lafranceinsoumise/djan"
+
+[tool.hatch.version]
+path = "src/djan/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+[tool.hatch.envs.default.scripts]
+runserver = "python ./manage.py runserver"
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:djan tests}"
+
+[tool.coverage.run]
+source_pkgs = [".", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/djan/__about__.py",
+]
+
+[tool.coverage.paths]
+djan = ["src/djan", "*/djan/src/djan"]
+tests = ["tests", "*/djan/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
