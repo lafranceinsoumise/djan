@@ -48,6 +48,7 @@ class Redirection(models.Model):
         verbose_name=_("Destination URL"),
         max_length=4000,
         help_text=_("The complete destination URL. Must be an absolute URL."),
+        db_index=True,
     )
 
     http_status = models.IntegerField(

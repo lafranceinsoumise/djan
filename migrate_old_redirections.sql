@@ -20,4 +20,4 @@ SELECT
     0
 FROM django_redirect
 WHERE true
-ON CONFLICT (site_id) DO NOTHING;
+ON CONFLICT (site_id, short_url) DO NOTHING;
