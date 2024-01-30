@@ -5,14 +5,13 @@ build-backend = "hatchling.build"
 [project]
 name = "djan"
 dynamic = ["version"]
-description = "Un tout petit racourcisseur d'URLs"
+description = "Un racourcisseur d'URLs super simple"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
 keywords = []
 authors = [
   { name = "Salomé Cheysson", email = "salome@cheysson.fr" },
-  { name = "Maud Royer", email = "bonjour@maudroyer.fr"},
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -25,7 +24,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["django>=5.0.1"]
+dependencies = ["django>=5.0.1", "django-redis>=5.4.0"]
 
 [project.urls]
 Documentation = "https://github.com/lafranceinsoumise/djan#readme"
@@ -39,11 +38,16 @@ path = "src/djan/__about__.py"
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
+  "pytest-django",
+  "black",
+  "python-dotenv",
+  "ipython",
+  "pytest-redislite",
 ]
 [tool.hatch.envs.default.scripts]
-runserver = "python ./manage.py runserver"
-test = "pytest {args:tests}"
-test-cov = "coverage run -m pytest {args:tests}"
+manage = "dotenv run python ./manage.py {args}"
+test = "pytest {args:src/djan}"
+test-cov = "coverage run -m pytest {args:src/djan}"
 cov-report = [
   "- coverage combine",
   "coverage report",
@@ -61,10 +65,15 @@ dependencies = [
   "mypy>=1.0.0",
 ]
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:djan tests}"
+check = "mypy --install-types --non-interactive {args:src/djan tests}"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "djan.tests.settings"
+# -- recommended but optional:
+python_files = ["test_*.py", "*_test.py", "tests/*.py"]
 
 [tool.coverage.run]
-source_pkgs = [".", "tests"]
+source_pkgs = ["djan", "tests"]
 branch = true
 parallel = true
 omit = [
