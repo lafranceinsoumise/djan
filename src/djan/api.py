@@ -2,17 +2,18 @@ import hmac
 import secrets
 
 from django.conf import settings
-from django.contrib.redirects.models import Redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.forms import Form, URLField, IntegerField
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from djan.models import Redirection
+
 
 class ShortenForm(Form):
-    url = URLField(required=True)
-    length = IntegerField(max_value=255, required=False)
+    url = URLField(required=True, assume_scheme="https")
+    length = IntegerField(max_value=4000, required=False)
 
 
 @require_POST
@@ -30,13 +31,13 @@ def shorten_view(request):
         length = form.cleaned_data["length"] or 5
         random_string = secrets.token_urlsafe(length)[:length]
         site = get_current_site(request)
-        redirect, new = Redirect.objects.get_or_create(
+        redirect, new = Redirection.objects.get_or_create(
             site_id=site.id,
-            new_path=form.cleaned_data["url"],
-            defaults={"old_path": "/" + random_string},
+            destination_url=form.cleaned_data["url"],
+            defaults={"short_url": random_string},
         )
 
-        return HttpResponse(request.build_absolute_uri(redirect.old_path))
+        return HttpResponse(request.build_absolute_uri(f"/{redirect.short_url}"))
 
     return HttpResponseBadRequest(
         "\n".join(
