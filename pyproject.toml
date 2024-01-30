@@ -20,6 +20,9 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
+packages = [
+  { include = "djan", from = "src"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
