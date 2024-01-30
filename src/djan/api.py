@@ -57,10 +57,10 @@ def shorten_view(request):
         length = form.cleaned_data["length"] or 5
         random_string = secrets.token_urlsafe(length)[:length]
         site = get_current_site(request)
-        redirect, new = Redirection.objects.get_or_create(
+        redirect = Redirection.objects.create(
             site_id=site.id,
             destination_url=form.cleaned_data["url"],
-            defaults={"short_url": random_string},
+            short_url=random_string,
         )
 
         return HttpResponse(request.build_absolute_uri(f"/{redirect.short_url}"))
