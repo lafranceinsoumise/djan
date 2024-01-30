@@ -74,6 +74,11 @@ def shorten_view(request):
     )
 
 
+def status_view(request):
+    check_authorization_header(request)
+    return JsonResponse({"status": "ok"})
+
+
 def counter_view(request, short_url):
     check_authorization_header(request)
 

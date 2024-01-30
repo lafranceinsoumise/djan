@@ -21,6 +21,7 @@ from djan import api, views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/status", api.status_view, name="api_status_view"),
     path("api/shorten", api.shorten_view, name="api_shorten_view"),
     path("api/info/<path:short_url>", api.counter_view, name="counter_view"),
     path("<path:short_url>", views.redirect_view, name="redirect"),
