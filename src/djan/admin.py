@@ -13,3 +13,4 @@ class RedirectionAdmin(admin.ModelAdmin):
 
     list_display = ("short_url", "site", "destination_url", "http_status")
     readonly_fields = ("counter", "unique_counter")
+    search_fields = ("short_url", "destination_url")
