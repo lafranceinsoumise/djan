@@ -1,17 +1,13 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[project]
+[tool.poetry]
 name = "djan"
-dynamic = ["version"]
+version = "0.1.1"
 description = "Un racourcisseur d'URLs super simple"
 readme = "README.md"
-requires-python = ">=3.8"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "Salomé Cheysson", email = "salome@cheysson.fr" },
+  "Salomé Cheysson <salome@cheysson.fr>",
+  "Maud Royer <bonjour@maudroyer.fr>",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -24,15 +20,30 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["django>=5.0.1", "django-redis>=5.4.0"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = ">=5.0.1"
+django-redis = ">=5.4.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+python-dotenv = "*"
+ipython = "*"
+coverage = { version = ">=6.5", extras = ["toml"] }
+pytest = "*"
+pytest-django ="*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 
 [project.urls]
 Documentation = "https://github.com/lafranceinsoumise/djan#readme"
 Issues = "https://github.com/lafranceinsoumise/djan/issues"
 Source = "https://github.com/lafranceinsoumise/djan"
-
-[tool.hatch.version]
-path = "src/djan/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
@@ -44,28 +55,6 @@ dependencies = [
   "ipython",
   "pytest-redislite",
 ]
-[tool.hatch.envs.default.scripts]
-manage = "dotenv run python ./manage.py {args}"
-test = "pytest {args:src/djan}"
-test-cov = "coverage run -m pytest {args:src/djan}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
-
-[[tool.hatch.envs.all.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
-
-[tool.hatch.envs.types]
-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/djan tests}"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "djan.tests.settings"
