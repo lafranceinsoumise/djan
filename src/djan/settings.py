@@ -19,6 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -121,8 +124,42 @@ STATIC_URL = "/static/"
 SECRET_KEY = os.environ.get("SECRET_KEY")
 API_TOKEN = os.environ.get("API_TOKEN", False)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
+# logging
+LOG_LEVEL = "WARNING"
+LOG_DISABLE_JOURNALD = os.environ.get("LOG_DISABLE_JOURNALD", "").lower() in [
+    "y",
+    "yes",
+    "true",
+]
+
+if not DEBUG:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "journald": {
+                "level": "DEBUG",
+                "class": (
+                    "cysystemd.journal.JournaldLogHandler"
+                    if not LOG_DISABLE_JOURNALD
+                    else "logging.StreamHandler"
+                ),
+            },
+            "admins_mail": {
+                "level": "ERROR",
+                "class": "django.utils.log.AdminEmailHandler",
+            },
+        },
+        "loggers": {
+            "django": {"handlers": ["journald"], "level": "INFO", "propagate": True},
+            "djan": {
+                "handlers": ["journald", "admins_mail"],
+                "level": "DEBUG",
+                "propagate": True,
+            },
+        },
+    }
+
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
