@@ -1,9 +1,9 @@
+from urllib.parse import urlparse, urlunparse
+
 from django.contrib.sites.models import Site
 from django.db import models
 from django.http import QueryDict
 from django.utils.translation import gettext_lazy as _
-
-from urllib.parse import urlparse, urlunparse
 
 
 class HttpStatus(models.IntegerChoices):
