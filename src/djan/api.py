@@ -34,8 +34,9 @@ def check_authorization_header(request):
         raise PermissionDenied("Authenticate using bearer token")
 
     token = request.headers["Authorization"][len(PREF) :].strip()
-    if len(token) != len(settings.API_TOKEN) or hmac.compare_digest(
-        request.GET.get("token"), settings.API_TOKEN
+    print(token, settings.API_TOKEN)
+    if len(token) != len(settings.API_TOKEN) or not hmac.compare_digest(
+        token, settings.API_TOKEN
     ):
         raise PermissionDenied("Invalid token")
 
