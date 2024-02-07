@@ -1,4 +1,5 @@
 import string
+from hashlib import sha1
 from importlib.resources import open_text, files
 
 from django.utils.crypto import get_random_string
@@ -33,7 +34,9 @@ def get_normalized_query_params(request):
     query_params = request.GET
     # we sort the query params to guarantee unicity
     pairs = sorted((k, v) for k, l in query_params.lists() for v in l)
-    return "&".join(f"{k}={quote(v)}" for k, v in pairs)
+    hash = sha1()
+    hash.update("&".join(f"{k}={quote(v)}" for k, v in pairs).encode())
+    return hash.hexdigest()
 
 
 unique_key_funcs = {
@@ -55,7 +58,6 @@ def unique_should_be_counted(redirection, request):
 
     filter_key = f"redirection:{redirection.id}"
     unique_key = get_unique_key(redirection, request)
-    print(filter_key, unique_key)
     con = get_redis_connection()
     if _script is None:
         with (files("djan") / "unique_should_be_counted.lua").open("r") as fd:
