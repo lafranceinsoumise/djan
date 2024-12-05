@@ -43,6 +43,7 @@ class Redirection(models.Model):
             "The source URL, without the domain name, and without the initial slash. It must not contain any question"
             "mark or hash sign."
         ),
+        blank=True  # allow redirection for root url
     )
     destination_url = models.URLField(
         verbose_name=_("Destination URL"),
