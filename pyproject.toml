@@ -1,4 +1,4 @@
-[tool.poetry]
+[project]
 name = "djan"
 version = "0.1.1"
 description = "Un racourcisseur d'URLs super simple"
@@ -6,8 +6,8 @@ readme = "README.md"
 license = "MIT"
 keywords = []
 authors = [
-  "Salomé Cheysson <salome@cheysson.fr>",
-  "Maud Royer <bonjour@maudroyer.fr>",
+  { name = "Salomé Cheysson", email = "salome@cheysson.fr" },
+  { name = "Maud Royer", email = "bonjour@maudroyer.fr" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
