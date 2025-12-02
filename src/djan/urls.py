@@ -24,5 +24,6 @@ urlpatterns = [
     path("api/status", api.status_view, name="api_status_view"),
     path("api/shorten", api.shorten_view, name="api_shorten_view"),
     path("api/info/<path:short_url>", api.counter_view, name="counter_view"),
+    path("", views.redirect_view, {"short_url": ""}, name="redirect_root"),
     path("<path:short_url>", views.redirect_view, name="redirect"),
 ]
