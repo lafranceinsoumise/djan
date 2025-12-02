@@ -24,6 +24,32 @@ packages = [
   { include = "djan", from = "src"}
 ]
 
+[tool.poetry]
+name = "djan"
+version = "0.1.1"
+description = "Un racourcisseur d'URLs super simple"
+readme = "README.md"
+license = "MIT"
+keywords = []
+authors = [
+  "Salomé Cheysson <salome@cheysson.fr>",
+  "Maud Royer <bonjour@maudroyer.fr>",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+packages = [
+  { include = "djan", from = "src"}
+]
+
 [tool.poetry.dependencies]
 python = "^3.12"
 django = ">=5.0.1"
