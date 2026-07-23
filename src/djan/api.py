@@ -4,7 +4,7 @@ import secrets
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import PermissionDenied
-from django.forms import Form, URLField, IntegerField
+from django.forms import Form, URLField, IntegerField, CharField
 from django.http import (
     HttpResponse,
     HttpResponseBadRequest,
@@ -21,6 +21,7 @@ from djan.models import Redirection
 class ShortenForm(Form):
     url = URLField(required=True, assume_scheme="https")
     length = IntegerField(max_value=4000, required=False)
+    prefix = CharField(max_length=64, required=False)
 
 
 def check_authorization_header(request):
@@ -57,12 +58,15 @@ def shorten_view(request):
     if form.is_valid():
         length = form.cleaned_data["length"] or 5
         random_string = secrets.token_urlsafe(length)[:length]
+        prefix =  form.cleaned_data["prefix"] or ""
+        short_url = prefix + random_string
         site = get_current_site(request)
         redirect = Redirection.objects.create(
             site_id=site.id,
             destination_url=form.cleaned_data["url"],
-            short_url=random_string,
+            short_url=short_url,
         )
+
 
         return HttpResponse(request.build_absolute_uri(f"/{redirect.short_url}"))
 
