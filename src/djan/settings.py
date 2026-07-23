@@ -167,3 +167,6 @@ STATIC_ROOT = os.environ.get("STATIC_ROOT")
 SITE_ID = int(os.environ["SITE_ID"]) if "SITE_ID" in os.environ else None
 LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", "en-us")
 TIME_ZONE = os.environ.get("TIME_ZONE", "UTC")
+
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS = ["https://djan.lndo.site"]
