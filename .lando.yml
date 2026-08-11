@@ -1,0 +1,23 @@
+name: djan
+
+proxy:
+  django:
+    - djan.lndo.site
+
+services:
+  django:
+      type: python:3.12
+      ssl: true
+      build:
+        - pip install pipx
+        - pipx install poetry --force
+        - pipx install python-dotenv[cli]
+        - poetry config virtualenvs.in-project true
+      command: poetry sync && poetry run dotenv run ./manage.py runserver 0.0.0.0:80
+  redis:
+    type: redis
+
+tooling:
+  manage:
+    service: django
+    cmd: poetry run dotenv run ./manage.py
