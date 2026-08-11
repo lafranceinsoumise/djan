@@ -70,7 +70,7 @@ pytest-django ="*"
 optional = true
 
 [tool.poetry.group.prod.dependencies]
-cysystemd = "^1.6.0"
+cysystemd = "^2.0.5"
 
 [build-system]
 requires = ["poetry-core"]
