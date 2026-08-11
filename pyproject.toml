@@ -62,7 +62,7 @@ optional = true
 black = "*"
 python-dotenv = "*"
 ipython = "*"
-coverage = { version = ">=6.5", extras = ["toml"] }
+coverage = { version = ">=7.15.4", extras = ["toml"] }
 pytest = "*"
 pytest-django ="*"
 
