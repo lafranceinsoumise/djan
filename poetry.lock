@@ -217,13 +217,27 @@ toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
 
 [[package]]
 name = "cysystemd"
-version = "1.6.3"
+version = "2.0.5"
 description = "systemd wrapper in Cython"
 optional = false
-python-versions = "<4,>3.6"
+python-versions = "<4,>=3.8"
 groups = ["prod"]
 files = [
-    {file = "cysystemd-1.6.3.tar.gz", hash = "sha256:b6f2cf29233e65a1f37933d60a5ca9f654acbea4b086d1febe4265433f491a18"},
+    {file = "cysystemd-2.0.5-cp310-cp310-manylinux_2_34_aarch64.whl", hash = "sha256:c9a34f408e06d1dc0f527ec0793c781357411489ad2d6b53406d966a77e52dc0"},
+    {file = "cysystemd-2.0.5-cp310-cp310-manylinux_2_34_x86_64.whl", hash = "sha256:515755c45bf605d9942c696afedc050a46468b2ea3d940394a64af462db1c87b"},
+    {file = "cysystemd-2.0.5-cp311-cp311-manylinux_2_34_aarch64.whl", hash = "sha256:f2e9479bd471a38ab8dfc6c52c9ba33462e7c37b64e50975ef0eaaf242d684c0"},
+    {file = "cysystemd-2.0.5-cp311-cp311-manylinux_2_34_x86_64.whl", hash = "sha256:95f692ebdeb219ab770c7f638434acd76504e97beef6054c7ee37ad8847cb656"},
+    {file = "cysystemd-2.0.5-cp312-cp312-manylinux_2_34_aarch64.whl", hash = "sha256:693426351795a82d0ce6b3c6667434c25eb671bc1652dd374bbf1144d4af7aa9"},
+    {file = "cysystemd-2.0.5-cp312-cp312-manylinux_2_34_x86_64.whl", hash = "sha256:764568f622392a8cbc6c692ec83ce63baca559434f850ff3e90712d9275a3a8b"},
+    {file = "cysystemd-2.0.5-cp313-cp313-manylinux_2_34_aarch64.whl", hash = "sha256:9ec006a3549f1eef13f34e87bf62eb744cd0d588171c936e90d93cf3e3ac4ec3"},
+    {file = "cysystemd-2.0.5-cp313-cp313-manylinux_2_34_x86_64.whl", hash = "sha256:a8c573e6ec970b3643dfae675a904ef81aa59d78e8e9ff331896c293a4057279"},
+    {file = "cysystemd-2.0.5-cp314-cp314-manylinux_2_34_aarch64.whl", hash = "sha256:87b474cb6a3a4c6fea5e822c4c61a3dcdd913b5255bbd1d887677db68279ed91"},
+    {file = "cysystemd-2.0.5-cp314-cp314-manylinux_2_34_x86_64.whl", hash = "sha256:4597b258d7ea55ef6ff2471fbf6ac674b47432ed7b3009e061532bd2e73251d7"},
+    {file = "cysystemd-2.0.5-cp38-cp38-manylinux_2_34_aarch64.whl", hash = "sha256:aca22edef17468341bb38eea6ca0f543d20aed2aaa8147cf1565ad5a2de2020f"},
+    {file = "cysystemd-2.0.5-cp38-cp38-manylinux_2_34_x86_64.whl", hash = "sha256:2dec07a4c86b45102c05569383d4eb47a5d80bf6318c1965236960f856cd7fa8"},
+    {file = "cysystemd-2.0.5-cp39-cp39-manylinux_2_34_aarch64.whl", hash = "sha256:d8ab460465654a668c2cb648b96b47be5f38f132299c69a8ea0eb471d0ba9e1f"},
+    {file = "cysystemd-2.0.5-cp39-cp39-manylinux_2_34_x86_64.whl", hash = "sha256:9024e53c3ca04d6c17fca0861e776b55c939f5efa7f9b0e573a2230a16345f5c"},
+    {file = "cysystemd-2.0.5.tar.gz", hash = "sha256:faac7506b6a709e96c0b0028bc5b3b62c3f5457b31e13e7d82b7a5f1c1889d96"},
 ]
 
 [[package]]
@@ -763,4 +777,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "e1775418da31925a9f6cbaa3708d8cb19d4466633e4033a8de21160ab71ebf7a"
+content-hash = "26a524aeaa2ed4d88e297d27ae95419f963c83597a48e85c10917a9760f6d12c"
