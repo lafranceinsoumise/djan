@@ -25,6 +25,7 @@ DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
 
 # Application definition
 INSTALLED_APPS = [
+    "djan",  # avant l'admin et two_factor pour pouvoir surcharger leurs templates
     "django.contrib.sites",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -32,7 +33,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "djan",
+    "django_otp",
+    "django_otp.plugins.otp_static",
+    "django_otp.plugins.otp_totp",
+    "two_factor",
 ]
 
 MIDDLEWARE = [
@@ -41,6 +45,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_otp.middleware.OTPMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -106,6 +111,12 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+# Two-factor authentication (optional per user)
+LOGIN_URL = "two_factor:login"
+LOGIN_REDIRECT_URL = "admin:index"
+OTP_TOTP_ISSUER = os.environ.get("OTP_TOTP_ISSUER", "Djan")
 
 
 # Internationalization
