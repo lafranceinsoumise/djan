@@ -15,20 +15,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
-from django.views.generic import RedirectView
-from two_factor.urls import urlpatterns as tf_urls
+from django.urls import path
 
 from djan import api, views
 
 urlpatterns = [
-    # l'admin passe par la page de connexion two_factor, qui demande un code
-    # uniquement aux utilisateurs ayant configuré la double authentification
-    path(
-        "admin/login/",
-        RedirectView.as_view(pattern_name="two_factor:login", query_string=True),
-    ),
-    path("admin/", include(tf_urls)),
     path("admin/", admin.site.urls),
     path("api/status", api.status_view, name="api_status_view"),
     path("api/shorten", api.shorten_view, name="api_shorten_view"),

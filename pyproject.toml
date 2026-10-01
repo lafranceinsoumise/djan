@@ -54,7 +54,7 @@ packages = [
 python = "^3.12"
 django = ">=5.2.16"
 django-redis = ">=5.4.0"
-django-two-factor-auth = {extras = ["qrcode"], version = "^1.18.1"}
+django-otp = {extras = ["qrcode"], version = "^1.7.3"}
 
 [tool.poetry.group.dev]
 optional = true

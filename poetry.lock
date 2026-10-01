@@ -260,21 +260,6 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
-name = "django-formtools"
-version = "2.7"
-description = "A set of high-level abstractions for Django forms"
-optional = false
-python-versions = ">=3.10"
-groups = ["main"]
-files = [
-    {file = "django_formtools-2.7-py3-none-any.whl", hash = "sha256:06e4ab1f9c999f5b2ec6670cb2d51b77117599f4f17c5855f38de158b1c7f247"},
-    {file = "django_formtools-2.7.tar.gz", hash = "sha256:52b30c08571108023937e4b5d96a5cc35282ff0a2e51630aeea00e27d723d3ac"},
-]
-
-[package.dependencies]
-Django = ">=5.2"
-
-[[package]]
 name = "django-otp"
 version = "1.7.3"
 description = "A pluggable framework for adding two-factor authentication to Django using one-time passwords."
@@ -288,30 +273,11 @@ files = [
 
 [package.dependencies]
 django = ">=4.2"
+qrcode = {version = "*", optional = true, markers = "extra == \"qrcode\""}
 
 [package.extras]
 qrcode = ["qrcode"]
 segno = ["segno"]
-
-[[package]]
-name = "django-phonenumber-field"
-version = "8.5.0"
-description = "An international phone number field for django models."
-optional = false
-python-versions = ">=3.10"
-groups = ["main"]
-files = [
-    {file = "django_phonenumber_field-8.5.0-py3-none-any.whl", hash = "sha256:a6dd71250f7fd0724aad995df01bdb4ac457a65622f120d0d623792fe8283798"},
-    {file = "django_phonenumber_field-8.5.0.tar.gz", hash = "sha256:19c606fda7bb25630c4913f7ac83c1824186ea17e2e4c6dc9aa9373e8f5843c5"},
-]
-
-[package.dependencies]
-Django = ">=4.2"
-
-[package.extras]
-babel = ["Babel"]
-phonenumbers = ["phonenumbers (>=7.0.2)"]
-phonenumberslite = ["phonenumberslite (>=7.0.2)"]
 
 [[package]]
 name = "django-redis"
@@ -331,36 +297,6 @@ redis = ">=4.0.2"
 
 [package.extras]
 hiredis = ["redis[hiredis] (>=4.0.2)"]
-
-[[package]]
-name = "django-two-factor-auth"
-version = "1.18.1"
-description = "Complete Two-Factor Authentication for Django"
-optional = false
-python-versions = ">=3.9"
-groups = ["main"]
-files = [
-    {file = "django_two_factor_auth-1.18.1-py3-none-any.whl", hash = "sha256:ccc9cee10be880037914e572389be6dcae93947709a8a9ff01fb23f7dee254f2"},
-    {file = "django_two_factor_auth-1.18.1.tar.gz", hash = "sha256:9d624db63123141cd95a6afe3d626105c3c29a7c8e25a3d93411dd1fac0be464"},
-]
-
-[package.dependencies]
-Django = ">=4.2"
-django-formtools = "*"
-django_otp = ">=0.8.0"
-django-phonenumber-field = "<9"
-qrcode = "<9"
-
-[package.extras]
-call = ["twilio (>=6.0)"]
-docs = ["django-two-factor-auth[call]", "django-two-factor-auth[phonenumberslite]", "django-two-factor-auth[webauthn]", "django-two-factor-auth[yubikey]", "sphinx", "sphinx_rtd_theme"]
-linting = ["isort (<=5.99)", "ruff"]
-phonenumbers = ["phonenumbers (>=7.0.9,<8.99)"]
-phonenumberslite = ["phonenumberslite (>=7.0.9,<8.99)"]
-sms = ["twilio (>=6.0)"]
-tests = ["coverage", "freezegun", "tox"]
-webauthn = ["webauthn (>=2.0,<2.99)"]
-yubikey = ["django-otp-yubikey"]
 
 [[package]]
 name = "executing"
@@ -867,4 +803,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "854674418062a15871e8b01ee3f15b0bf32a823dd47d2cb723a38fff04de65b7"
+content-hash = "926662750c7792ce7ee427937579ee97dc1a9b5a340b7cc596490d525a5ccb03"
