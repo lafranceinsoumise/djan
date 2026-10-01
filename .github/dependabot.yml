@@ -1,12 +1,38 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
+# Documentation des options :
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+#
+# Les mises à jour majeures ne sont dans aucun groupe : elles arrivent
+# chacune dans leur propre PR pour pouvoir être testées individuellement.
 
 version: 2
 updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 15
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      # Toutes les alertes de sécurité dans une seule PR
+      securite:
+        applies-to: security-updates
+        patterns: ["*"]
+
+      dev:
+        dependency-type: "development"
+        update-types: ["minor", "patch"]
+
+      prod-patch:
+        dependency-type: "production"
+        update-types: ["patch"]
+
+      prod-mineures:
+        dependency-type: "production"
+        update-types: ["minor"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      actions:
+        patterns: ["*"]
