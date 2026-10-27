@@ -54,7 +54,7 @@ packages = [
 python = "^3.12"
 django = ">=5.2.17"
 django-redis = ">=5.4.0"
-django-otp = {extras = ["qrcode"], version = "^1.7.3"}
+django-otp = {extras = ["qrcode"], version = "^1.7.5"}
 
 [tool.poetry.group.dev]
 optional = true

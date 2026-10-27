@@ -292,14 +292,14 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-otp"
-version = "1.7.3"
+version = "1.7.5"
 description = "A pluggable framework for adding two-factor authentication to Django using one-time passwords."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "django_otp-1.7.3-py3-none-any.whl", hash = "sha256:7d52fb0f76c4c1c86cbc71c196d3f79941b0b84aff980e45193bef89a70a7a12"},
-    {file = "django_otp-1.7.3.tar.gz", hash = "sha256:3ce501173bf1b936146ffe5ff0cfdae1a0c7eb46cce1e9e3fdddd984d993c74f"},
+    {file = "django_otp-1.7.5-py3-none-any.whl", hash = "sha256:475d4111e07d61616996f098d08d29884da6397273a11f53c1b8e8c75d27e1dc"},
+    {file = "django_otp-1.7.5.tar.gz", hash = "sha256:7f554d21dcd035550c3b8e3f154b1f422fee71fdc75c8a3bf96e42a2ea6dafcc"},
 ]
 
 [package.dependencies]
@@ -870,4 +870,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "c894b1346e4ed6a6cb45e7f73fdae5462771bd5d4e1cc0430fb7c696783a4d6b"
+content-hash = "9ba53d9b0b1e11c3cf8db9fef843e7ee48fe8d1a65ef359c05e003529456d18d"
