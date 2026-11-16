@@ -1,0 +1,41 @@
+name: "Tests"
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    services:
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Set up Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: "3.12"
+
+    - name: Install Poetry
+      run: pipx install poetry
+
+    - name: Install dependencies
+      run: poetry install --with dev
+
+    - name: Check for missing migrations
+      run: poetry run ./manage.py makemigrations --check --dry-run
+
+    - name: Run tests
+      run: poetry run pytest
